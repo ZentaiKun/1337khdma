@@ -6,7 +6,7 @@
 /*   By: zzouhri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/15 10:57:09 by zzouhri           #+#    #+#             */
-/*   Updated: 2026/10/15 11:50:30 by zzouhri          ###   ########.fr       */
+/*   Updated: 2026/10/23 12:15:35 by zzouhri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -34,7 +34,7 @@ static int	ft_stringcounter(char const *s, char c)
 	return (counter);
 }
 
-static void	ft_freeall(char **ptr, int i)
+static char	**ft_freeall(char **ptr, int i)
 {
 	while (i > 0)
 	{
@@ -69,15 +69,11 @@ static char	**ft_allocate_words(char const *s, char c, int strcount, char **ptr)
 	return (ptr);
 }
 
-	
-
-
-	
 char	**ft_split(char const *s, char c)
 {
-	int	strcount;
+	int		strcount;
 	char	**ptr;
-	
+
 	if (!s)
 		return (NULL);
 	strcount = ft_stringcounter(s, c);
