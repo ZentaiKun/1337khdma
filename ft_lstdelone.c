@@ -9,7 +9,7 @@
 /*   Updated: 2026/10/18 11:49:48 by zzouhri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "ftlib.h"
+#include "libft.h"
 
 void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
