@@ -20,16 +20,16 @@ char	*ft_strrchr(const char *str, int c)
 	index = -1;
 	while (str[i])
 	{
-		if (str[i] == c)
+		if (str[i] == (char) c)
 			index = i;
 		i++;
 	}
 	if (str[i] == c)
 	{
 		index = i;
-		return ((unsigned char *)(str + index));
+		return ((char *)(str + index));
 	}
 	if (index == -1)
 		return (NULL);
-	return ((unsigned char *)(str + index));
+	return ((char *)(str + index));
 }
