@@ -37,6 +37,7 @@ int	ft_stringcounter(char const *s, char c)
 char	**ft_split(char const *s, char c)
 {
 	int	strcount;
+	int	start;
 	char	**ptr;
 	int	i;
 	int	j;
@@ -51,9 +52,12 @@ char	**ft_split(char const *s, char c)
 	{
 		while (s[j] && (s[j] == c))
 			j++;
-		ptr[i] = ft_strmaker(&s[j], c, ft_strlendelim(&s[j], c));
+		start = j;
 		while(s[j] && (s[j] != c))
 			j++;
+		ptr[i] = ft_substr(s, start, j - start);
+		if (!ptr[i])
+			return (NULL);
 		i++;
 	}
 	ptr[i] = NULL;
