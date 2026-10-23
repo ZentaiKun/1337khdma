@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include "libft.h"
 
-int	ft_stringcounter(char const *s, char c)
+static int	ft_stringcounter(char const *s, char c)
 {
 	int	counter;
 	int	i;
@@ -20,7 +20,7 @@ int	ft_stringcounter(char const *s, char c)
 	i = 0;
 	counter = 0;
 	inaword = 0;
-	while(s[i])
+	while (s[i])
 	{
 		if ((s[i] != c) && inaword == 0)
 		{
@@ -34,32 +34,56 @@ int	ft_stringcounter(char const *s, char c)
 	return (counter);
 }
 
-char	**ft_split(char const *s, char c)
+static void	ft_freeall(char **ptr, int i)
 {
-	int	strcount;
-	int	start;
-	char	**ptr;
+	while (i > 0)
+	{
+		i--;
+		free(ptr[i]);
+	}
+	free(ptr);
+	return (NULL);
+}
+
+static char	**ft_allocate_words(char const *s, char c, int strcount, char **ptr)
+{
 	int	i;
 	int	j;
+	int	start;
 
-	strcount = ft_stringcounter(s, c);
 	i = 0;
 	j = 0;
-	ptr = malloc(sizeof(char *) * (strcount + 1));
-	if (!ptr)
-		return (NULL);
-	while(i < strcount)
+	while (i < strcount)
 	{
 		while (s[j] && (s[j] == c))
 			j++;
 		start = j;
-		while(s[j] && (s[j] != c))
+		while (s[j] && (s[j] != c))
 			j++;
 		ptr[i] = ft_substr(s, start, j - start);
 		if (!ptr[i])
-			return (NULL);
+			return (ft_freeall(ptr, i));
 		i++;
 	}
 	ptr[i] = NULL;
+	return (ptr);
+}
+
+	
+
+
+	
+char	**ft_split(char const *s, char c)
+{
+	int	strcount;
+	char	**ptr;
+	
+	if (!s)
+		return (NULL);
+	strcount = ft_stringcounter(s, c);
+	ptr = malloc(sizeof(char *) * (strcount + 1));
+	if (!ptr)
+		return (NULL);
+	ptr = ft_allocate_words(s, c, strcount, ptr);
 	return (ptr);
 }
