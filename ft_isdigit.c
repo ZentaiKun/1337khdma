@@ -9,6 +9,8 @@
 /*   Updated: 2026/10/12 14:03:19 by zzouhri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
+
 int	ft_isdigit(int c)
 {
 	int	digitchecker;
